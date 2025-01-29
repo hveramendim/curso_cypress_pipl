@@ -3,6 +3,7 @@ node_modules/
 
 # Archivos de configuración del entorno
 .env
+info.txt
 
 # Cachés y logs
 npm-debug.log*
