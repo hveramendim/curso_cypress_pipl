@@ -18,7 +18,7 @@ pipeline {
             parallel {
                 stage('Pruebas en Slave 1') {
                     agent {
-                        label "Agent2_1"
+                        label "Agente2_1"
                     }
                     steps {
                         bat 'npx cypress run --record --parallel --key b17c96e1-7d53-43d2-8f33-39fa74b7e766'
@@ -27,7 +27,7 @@ pipeline {
 
                 stage('Pruebas en Slave 2') {
                     agent {
-                        label "Agent2_2"
+                        label "Agente2_2"
                     }
                     steps {
                         bat 'npx cypress run --record --parallel --key b17c96e1-7d53-43d2-8f33-39fa74b7e766'
