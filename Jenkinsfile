@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs "node"  // Cambia "node" por el nombre correcto configurado en Jenkins para NodeJS
+        nodejs "node"  // Configura el NodeJS adecuado
     }
 
     stages {
@@ -10,19 +10,18 @@ pipeline {
             steps {
                 echo 'Preparando entorno...'
                 git url: 'https://github.com/hveramendim/curso_cypress_pipl.git'
-                bat 'npm ci --legacy-peer-deps'  // Mejor opción para entorno de CI/CD, más rápido que npm install
-                bat 'npx cypress --version'  // Verifica la instalación de Cypress
+                bat 'npm ci --legacy-peer-deps'
+                bat 'npx cypress --version'
             }
         }
 
-        stage('Levantar servidor') {
+        // Comentando la etapa de levantamiento de servidor
+        /* stage('Levantar servidor') {
             steps {
                 echo 'Levantando el servidor...'
-                // Asegúrate de que el siguiente comando inicie tu servidor correctamente
-                bat 'npm run start &'  // Inicia el servidor en segundo plano
-                sleep(time: 15, unit: 'SECONDS')  // Espera para asegurar que el servidor esté disponible
+                bat 'npm run start'
             }
-        }
+        } */
 
         stage('Ejecutar pruebas en paralelo') {
             parallel {
@@ -31,7 +30,7 @@ pipeline {
                         label "Agente2_1"
                     }
                     steps {
-                        bat 'npm ci'  // Asegura que las dependencias estén en cada agente
+                        bat 'npm ci'
                         bat 'npx cypress run --record --parallel --key b17c96e1-7d53-43d2-8f33-39fa74b7e766'
                     }
                 }
@@ -41,7 +40,7 @@ pipeline {
                         label "Agente2_2"
                     }
                     steps {
-                        bat 'npm ci'  // Asegura las dependencias en este agente también
+                        bat 'npm ci'
                         bat 'npx cypress run --record --parallel --key b17c96e1-7d53-43d2-8f33-39fa74b7e766'
                     }
                 }
