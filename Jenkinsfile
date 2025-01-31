@@ -1,44 +1,53 @@
 pipeline {
     agent any
 
-    tools {nodejs "node"}
+    tools {
+        nodejs "node"  // Cambia "NodeJS" por el nombre configurado en Jenkins
+    }
 
     stages {
+        stage('Preparar entorno') {
+            steps {
+                echo 'Preparando entorno...'
+                git url: 'https://github.com/hveramendim/curso_cypress_pipl.git'
+                bat 'npm install'
+            }
+        }
 
-        stage('Cypress Parallel Test Suite') {
+        stage('Ejecutar pruebas en paralelo') {
             parallel {
-                stage('Slave 1') {
+                stage('Pruebas en Slave 1') {
                     agent {
                         label "Agent2_1"
                     }
                     steps {
-                        git url: 'https://github.com/hveramendim/curso_cypress_pipl.git'
-                        bat 'npm install'
-                        bat 'npm update'                       
-                        bat 'npx cypress run cypress run --record --key b17c96e1-7d53-43d2-8f33-39fa74b7e766  --parallel'
-                    
+                        bat 'npx cypress run --record --parallel --key b17c96e1-7d53-43d2-8f33-39fa74b7e766'
                     }
                 }
 
-                stage('Slave 2') {
+                stage('Pruebas en Slave 2') {
                     agent {
                         label "Agent2_2"
                     }
                     steps {
-                        git url: 'https://github.com/hveramendim/curso_cypress_pipl.git'
-                        bat 'npm install'
-                        bat 'npm update'                       
-                        bat 'npx cypress run cypress run --record --key b17c96e1-7d53-43d2-8f33-39fa74b7e766  --parallel'
-                    
+                        bat 'npx cypress run --record --parallel --key b17c96e1-7d53-43d2-8f33-39fa74b7e766'
                     }
                 }
-
-
             }
+        }
+    }
 
-             
+    post {
+        always {
+            echo 'Finalizando ejecución del pipeline...'
         }
 
+        success {
+            echo 'Pipeline ejecutado con éxito.'
+        }
+
+        failure {
+            echo 'El pipeline ha fallado.'
+        }
     }
-            
 }
