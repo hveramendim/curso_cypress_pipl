@@ -1,5 +1,17 @@
-"devDependencies": {
-  "cypress": "^14.0.1",
-  "@badeball/cypress-cucumber-preprocessor": "^22.0.0",
-  "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4"
+{
+  "name": "curso_cypress_pipl",
+  "version": "1.0.0",
+  "description": "Curso de Cypress 2024",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
+  },
+  "devDependencies": {
+    "cypress": "^14.0.1",
+    "@badeball/cypress-cucumber-preprocessor": "^22.0.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4"
+  },
+  "author": "Henry Veramendi",
+  "license": "ISC"
 }
