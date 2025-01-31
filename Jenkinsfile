@@ -11,6 +11,8 @@ pipeline {
                 echo 'Preparando entorno...'
                 git url: 'https://github.com/hveramendim/curso_cypress_pipl.git'
                 bat 'npm install'
+                bat 'npx cypress install'  // Instalar Cypress
+                bat 'npx cypress --version' // Verificar versión de Cypress
             }
         }
 
