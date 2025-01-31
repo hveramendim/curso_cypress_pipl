@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs "node"  // Cambia "NodeJS" por el nombre configurado en Jenkins
+        nodejs "node"  // Cambia "node" por el nombre correcto configurado en Jenkins para NodeJS
     }
 
     stages {
@@ -10,9 +10,9 @@ pipeline {
             steps {
                 echo 'Preparando entorno...'
                 git url: 'https://github.com/hveramendim/curso_cypress_pipl.git'
-                bat 'npm install'
-                bat 'npx cypress install'  // Instalar Cypress
-                bat 'npx cypress --version' // Verificar versión de Cypress
+                bat 'npm ci'  // Mejor opción para entorno de CI/CD, más rápido que npm install
+                bat 'npx cypress install --force'  // Fuerza instalación de Cypress
+                bat 'npx cypress --version'  // Verifica la instalación de Cypress
             }
         }
 
@@ -23,6 +23,7 @@ pipeline {
                         label "Agente2_1"
                     }
                     steps {
+                        bat 'npm ci'  // Asegura que las dependencias estén en cada agente
                         bat 'npx cypress run --record --parallel --key b17c96e1-7d53-43d2-8f33-39fa74b7e766'
                     }
                 }
@@ -32,6 +33,7 @@ pipeline {
                         label "Agente2_2"
                     }
                     steps {
+                        bat 'npm ci'  // Asegura las dependencias en este agente también
                         bat 'npx cypress run --record --parallel --key b17c96e1-7d53-43d2-8f33-39fa74b7e766'
                     }
                 }
