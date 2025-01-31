@@ -1,32 +1,19 @@
 const { defineConfig } = require("cypress");
-const path = require('path');
-const { addCucumberPreprocessorPlugin } = require('@badeball/cypress-cucumber-preprocessor');
-const createBundler = require('@bahmutov/cypress-esbuild-preprocessor');
-const createEsbuildPlugin = require('@badeball/cypress-cucumber-preprocessor/esbuild').createEsbuildPlugin;
 
 module.exports = defineConfig({
   e2e: {
-    setupNodeEvents: async (on, config) => {
-      // Configurar el preprocesador para Cucumber
-      const bundler = createBundler({
-        plugins: [createEsbuildPlugin(config)],
-      });
-
-      // Agregar eventos y preprocesador
-      on('file:preprocessor', bundler);
-      await addCucumberPreprocessorPlugin(on, config);
-
-      // Registro opcional de eventos adicionales
+    setupNodeEvents(on, config) {
+      // Aquí puedes agregar otros eventos si los necesitas
       on('before:browser:launch', (browser = {}, launchOptions) => {
         console.log(`Launching browser: ${browser.name}`);
       });
 
       return config;
     },
-    baseUrl: 'http://localhost:3000', // Cambia esta URL si es necesario
-    //specPattern: '**/*.feature',
-    supportFile: path.resolve(__dirname, 'cypress/support/e2e.js'),
-    video: true,         // Graba videos de las pruebas (puede deshabilitarse)
+    baseUrl: 'http://localhost:3000',  // Ajusta esta URL según tu aplicación
+    specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',  // Asegura que Cypress lea los archivos de prueba correctamente
+    supportFile: 'cypress/support/e2e.js',
+    video: true,         // Grabar videos (puedes desactivar esta opción)
     retries: {
       runMode: 2,        // Reintenta pruebas fallidas en ejecución normal
       openMode: 1,       // Reintenta pruebas fallidas en modo abierto (GUI)

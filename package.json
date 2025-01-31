@@ -8,9 +8,7 @@
     "cypress:open": "cypress open"
   },
   "devDependencies": {
-    "cypress": "^14.0.1",
-    "@badeball/cypress-cucumber-preprocessor": "^22.0.0",
-    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4"
+    "cypress": "^14.0.1"
   },
   "author": "Henry Veramendi",
   "license": "ISC"

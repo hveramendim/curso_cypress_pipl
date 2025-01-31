@@ -15,6 +15,15 @@ pipeline {
             }
         }
 
+        stage('Levantar servidor') {
+            steps {
+                echo 'Levantando el servidor...'
+                // Asegúrate de que el siguiente comando inicie tu servidor correctamente
+                bat 'npm run start &'  // Inicia el servidor en segundo plano
+                sleep(time: 15, unit: 'SECONDS')  // Espera para asegurar que el servidor esté disponible
+            }
+        }
+
         stage('Ejecutar pruebas en paralelo') {
             parallel {
                 stage('Pruebas en Slave 1') {
