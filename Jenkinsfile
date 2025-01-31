@@ -10,8 +10,7 @@ pipeline {
             steps {
                 echo 'Preparando entorno...'
                 git url: 'https://github.com/hveramendim/curso_cypress_pipl.git'
-                bat 'npm ci'  // Mejor opción para entorno de CI/CD, más rápido que npm install
-                bat 'npx cypress install --force'  // Fuerza instalación de Cypress
+                bat 'npm ci --legacy-peer-deps'  // Mejor opción para entorno de CI/CD, más rápido que npm install
                 bat 'npx cypress --version'  // Verifica la instalación de Cypress
             }
         }
