@@ -6,7 +6,7 @@ module.exports = defineConfig({
       // Configuración adicional de eventos si es necesario
       return config;
     },
-    baseUrl: 'http://localhost:3000',  // Asegúrate de que el servidor esté levantado
+    //baseUrl: 'http://localhost:3000',  // Asegúrate de que el servidor esté levantado
     video: true,
     retries: {
       runMode: 2,
