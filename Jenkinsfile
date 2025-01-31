@@ -16,12 +16,12 @@ pipeline {
         }
 
         // Comentando la etapa de levantamiento de servidor
-        stage('Levantar servidor') {
+      /*  stage('Levantar servidor') {
             steps {
                 echo 'Levantando el servidor...'
                 bat 'npm run start'
             }
-        }
+        }*/
 
         stage('Ejecutar pruebas en paralelo') {
             parallel {
