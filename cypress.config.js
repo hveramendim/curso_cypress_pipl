@@ -24,7 +24,7 @@ module.exports = defineConfig({
       return config;
     },
     baseUrl: 'http://localhost:3000', // Cambia esta URL si es necesario
-    specPattern: '**/*.feature',
+    //specPattern: '**/*.feature',
     supportFile: path.resolve(__dirname, 'cypress/support/e2e.js'),
     video: true,         // Graba videos de las pruebas (puede deshabilitarse)
     retries: {
