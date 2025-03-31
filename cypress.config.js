@@ -13,5 +13,5 @@ module.exports = defineConfig({
       openMode: 1,
     },
   },
-  projectId: 'uvpmbq',  // Reemplaza con el ID correcto de tu proyecto en Cypress Dashboard
+  projectId: 'uvpmbq',  // Reemplaza con el ID correcto de tu proyecto en Cypress Dashboards
 });
